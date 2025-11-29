@@ -78,6 +78,8 @@ class _Setting extends State<PageSetting> {
       alignment: Alignment.center,
       padding: EdgeInsets.all(16),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
+        spacing: 16,
         children: [
           Expanded(
             child: Center(
@@ -95,14 +97,13 @@ class _Setting extends State<PageSetting> {
             ),
           ),
           BaseButton(
-            size: Size(200, 60),
+            size: Size(250, 60),
             text: '테스트',
             onPressed: _onClickTest,
             icon: Icons.check_box,
           ),
-          SizedBox(height: 16),
           BaseButton(
-            size: Size(300, 80),
+            size: Size(250, 60),
             text: '저장',
             onPressed: _onClickSave,
             icon: Icons.save,
