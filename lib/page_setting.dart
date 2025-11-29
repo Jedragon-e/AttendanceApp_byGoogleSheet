@@ -17,8 +17,27 @@ class _Setting extends State<PageSetting> {
   final TextEditingController controller = TextEditingController();
   String saveUrl = 'not';
 
+  String normalizeGoogleScriptUrl(String input) {
+    var url = input.trim();
+
+    // 프로토콜 안쓰면 붙여줌
+    if (!url.startsWith('http')) {
+      url = 'https://$url';
+    }
+
+    // script.google.com -> script.googleusercontent.com
+    url = url.replaceAll(
+      'https://script.google.com',
+      'https://script.googleusercontent.com',
+    );
+
+    return url;
+  }
+
   Future<void> saveData() async {
-    await Prefs.saveBaseUrl(controller.text);
+    final finalUrl = normalizeGoogleScriptUrl(controller.text);
+
+    await Prefs.saveBaseUrl(finalUrl);
   }
 
   void _onClickTest() async {

@@ -2,6 +2,7 @@
 import 'package:http/http.dart' as http;      // Http
 import 'dart:convert';                        // Json
 import 'package:google_demo/services/prefs.dart';
+import 'package:flutter/foundation.dart';
 
 class GoogleSheetService {
   String baseUrl = '';
@@ -25,15 +26,23 @@ class GoogleSheetService {
 
       if (response.statusCode == 200) {
         final List<dynamic> jsonData = json.decode(response.body);
-        _data = jsonData.map((e) => e as Map<String, dynamic>).toList();
-        _data.sort((a, b) => a['name'].compareTo(b['name'])); // 이름순으로 정렬
+        _data = jsonData.map<Map<String, dynamic>>(
+              (e) => Map<String, dynamic>.from(e as Map),
+        ).toList();
+        _data.sort((a, b) =>
+            (a['name']?.toString() ?? '')
+                .compareTo(b['name']?.toString() ?? '')); // 이름순으로 정렬
         return true;
       } else {
+        debugPrint('getUserInfo ERROR: $response.body');
+        debugPrint('$response.body');
         // 요청 실패
         return false;
       }
-    } catch (e) {
+    } catch (e, s) {
       // 에러 발생
+      debugPrint('getUserInfo ERROR: $e');
+      debugPrint('$s');
       return false;
     }
   }
@@ -63,6 +72,7 @@ class GoogleSheetService {
       final result = jsonDecode(response.body);
       return result['status'] == 'success';
     } else {
+      debugPrint('sendUserData ERROR: $response.body');
     }
 
     return false;
@@ -93,6 +103,7 @@ class GoogleSheetService {
       final result = jsonDecode(response.body);
       return result['status'] == 'success';
     } else {
+      debugPrint('sendAttendanceData ERROR: $response.body');
     }
     return false;
   }
