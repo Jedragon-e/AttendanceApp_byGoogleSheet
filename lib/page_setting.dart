@@ -21,15 +21,15 @@ class _Setting extends State<PageSetting> {
     var url = input.trim();
 
     // 프로토콜 안쓰면 붙여줌
-    if (!url.startsWith('http')) {
-      url = 'https://$url';
-    }
+    // if (!url.startsWith('http')) {
+    //   url = 'https://$url';
+    // }
 
     // script.google.com -> script.googleusercontent.com
-    url = url.replaceAll(
-      'https://script.google.com',
-      'https://script.googleusercontent.com',
-    );
+    // url = url.replaceAll(
+    //   'https://script.google.com',
+    //   'https://script.googleusercontent.com',
+    // );
 
     return url;
   }

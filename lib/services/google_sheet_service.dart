@@ -34,8 +34,7 @@ class GoogleSheetService {
                 .compareTo(b['name']?.toString() ?? '')); // 이름순으로 정렬
         return true;
       } else {
-        debugPrint('getUserInfo ERROR: $response.body');
-        debugPrint('$response.body');
+        debugPrint('getUserInfo ERROR: ${response.body}');
         // 요청 실패
         return false;
       }
@@ -72,7 +71,7 @@ class GoogleSheetService {
       final result = jsonDecode(response.body);
       return result['status'] == 'success';
     } else {
-      debugPrint('sendUserData ERROR: $response.body');
+      debugPrint('sendUserData ERROR: ${response.body}');
     }
 
     return false;
@@ -103,7 +102,7 @@ class GoogleSheetService {
       final result = jsonDecode(response.body);
       return result['status'] == 'success';
     } else {
-      debugPrint('sendAttendanceData ERROR: $response.body');
+      debugPrint('sendAttendanceData ERROR: ${response.body}');
     }
     return false;
   }
